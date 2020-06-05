@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class FieldWorkDto {
     private long id;
     private LocalDate dateOfWork;
-    private Parcel parcel;
+    private long parcelId;
     private String cultivatedPlant;
     private String typeOfWork;
     private String comments;

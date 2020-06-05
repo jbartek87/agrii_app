@@ -1,6 +1,6 @@
 package com.jbartek.agrii.repository;
 
-import com.jbartek.agrii.domain.Parcel;
+import com.jbartek.agrii.domain.Accountancy;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,18 +10,14 @@ import java.util.Optional;
 
 @Repository
 @Transactional
-public interface ParcelRepository extends CrudRepository<Parcel,Long> {
+public interface AccountancyRepository extends CrudRepository<Accountancy,Long> {
     @Override
-    List<Parcel> findAll();
+    List<Accountancy> findAll();
 
-
-    Optional<Parcel> findById(long id);
+    Optional<Accountancy> findById(long id);
 
     @Override
-    Parcel save(Parcel parcel);
+    Accountancy save(Accountancy accountancy);
 
     void deleteById(Long id);
-
-
 }
-

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WeatherDto {
+    private long id;
     private String city;
     private double temperature;
     private double windSpeed;

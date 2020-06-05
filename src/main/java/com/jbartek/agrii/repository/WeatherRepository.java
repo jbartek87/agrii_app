@@ -1,6 +1,6 @@
 package com.jbartek.agrii.repository;
 
-import com.jbartek.agrii.domain.Parcel;
+import com.jbartek.agrii.domain.Weather;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,18 +10,15 @@ import java.util.Optional;
 
 @Repository
 @Transactional
-public interface ParcelRepository extends CrudRepository<Parcel,Long> {
+public interface WeatherRepository extends CrudRepository<Weather, Long> {
     @Override
-    List<Parcel> findAll();
+    List<Weather> findAll();
 
 
-    Optional<Parcel> findById(long id);
+    Optional<Weather> findById(long id);
 
     @Override
-    Parcel save(Parcel parcel);
+    Weather save(Weather weather);
 
     void deleteById(Long id);
-
-
 }
-

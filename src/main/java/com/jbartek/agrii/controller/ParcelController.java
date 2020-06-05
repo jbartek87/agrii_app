@@ -2,8 +2,9 @@ package com.jbartek.agrii.controller;
 
 import com.jbartek.agrii.domain.ParcelDto;
 import com.jbartek.agrii.domain.SoilType;
+import com.jbartek.agrii.exceptions.ParcelNotFoundException;
 import com.jbartek.agrii.mapper.ParcelMapper;
-import com.jbartek.agrii.services.DbService;
+import com.jbartek.agrii.services.ParcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @CrossOrigin("*")
 public class ParcelController {
     @Autowired
-    DbService service;
+    ParcelService service;
 
     @Autowired
     ParcelMapper parcelMapper;
@@ -25,18 +26,18 @@ public class ParcelController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/parcels/{id}")
-    public ParcelDto getParcel(@PathVariable Long id) throws ParcelNotFoundException{
+    public ParcelDto getParcel(@PathVariable Long id) throws ParcelNotFoundException {
         return parcelMapper.mapToParcelDto(service.getParcel(id).orElseThrow(ParcelNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "delete")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/parcels")
     public void deleteParcel(@PathVariable Long id){
         service.deleteParcel(id);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/parcels")
     public ParcelDto updateParcel(@RequestBody ParcelDto parcelDto){
-        return new ParcelDto(1L, "200", "Sulechów", SoilType.GRUNT_ORNY, 200.0);
+        return parcelMapper.mapToParcelDto(service.saveParcel(parcelMapper.mapToParcel(parcelDto)));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/createParcels")

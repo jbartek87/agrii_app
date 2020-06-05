@@ -1,5 +1,6 @@
 package com.jbartek.agrii.repository;
 
+import com.jbartek.agrii.domain.FieldWork;
 import com.jbartek.agrii.domain.Parcel;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -10,18 +11,17 @@ import java.util.Optional;
 
 @Repository
 @Transactional
-public interface ParcelRepository extends CrudRepository<Parcel,Long> {
-    @Override
-    List<Parcel> findAll();
-
-
-    Optional<Parcel> findById(long id);
+public interface FieldWorkRepository extends CrudRepository<FieldWork, Long> {
 
     @Override
-    Parcel save(Parcel parcel);
+    List<FieldWork> findAll();
+
+    Optional<FieldWork> findById(long id);
+
+   @Override
+    FieldWork save(FieldWork fieldWork);
 
     void deleteById(Long id);
 
 
 }
-

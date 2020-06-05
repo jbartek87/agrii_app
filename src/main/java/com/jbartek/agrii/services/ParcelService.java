@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DbService {
+public class ParcelService {
     @Autowired
     ParcelRepository parcelRepository;
 
@@ -28,4 +28,10 @@ public class DbService {
     public void deleteParcel(final long id){
         parcelRepository.deleteById(id);
     }
+
+    public long getParcelId(long id){
+        return parcelRepository.findById(id).get().getId();
+
+    }
+
 }

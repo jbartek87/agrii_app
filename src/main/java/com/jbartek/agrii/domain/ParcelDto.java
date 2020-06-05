@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,5 +15,6 @@ public class ParcelDto {
     private String communeName;
     private SoilType soilType;
     private double area;
+    private List<FieldWork> fieldWorkList;
 
 }

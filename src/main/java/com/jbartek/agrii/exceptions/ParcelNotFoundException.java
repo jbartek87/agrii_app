@@ -1,4 +1,4 @@
-package com.jbartek.agrii.controller;
+package com.jbartek.agrii.exceptions;
 
 public class ParcelNotFoundException extends Exception{
 }
