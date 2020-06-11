@@ -40,6 +40,14 @@ public class Parcel {
     )
     private List<FieldWork>  fieldWorkList = new ArrayList<>();
 
+    @OneToMany(
+            targetEntity = PlantProtection.class,
+            mappedBy = "parcel",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<PlantProtection> plantProtectionList = new ArrayList<>();
+
     public Parcel(String parcelNumber, String precinct, SoilType soilType, Double area) {
         this.parcelNumber = parcelNumber;
         this.precinct = precinct;

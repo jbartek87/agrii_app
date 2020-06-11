@@ -1,5 +1,6 @@
 package com.jbartek.agrii.dto;
 
+import com.jbartek.agrii.domain.PlantProtection;
 import com.jbartek.agrii.enums.SoilType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,5 +18,6 @@ public class ParcelDto {
     private SoilType soilType;
     private double area;
     private List<FieldWorkDto> fieldWorkDtoList;
+    private List<PlantProtectionDto> plantProtectionDtoList;
 
 }

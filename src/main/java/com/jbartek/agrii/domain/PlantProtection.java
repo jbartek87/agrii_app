@@ -1,11 +1,13 @@
 package com.jbartek.agrii.domain;
 
+import com.jbartek.agrii.enums.ProtectionType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @AllArgsConstructor
@@ -17,20 +19,24 @@ public class PlantProtection {
     @Column(name = "ID", unique = true)
     private long id;
 
+    @Column(name = "DATE_OF_WORK")
+    private LocalDate dateOfWork;
+
     @Column(name = "PRODUCT_NAME")
     private String productName;
 
-    @Column(name = "TEMPERATURE")
-    private double temperature;
+    @Column(name = "PROTECTION_TYPE")
+    private ProtectionType protectionType;
 
-    @Column(name = "WIND_SPEED")
-    private double windSpeed;
+    @Column(name = "DOSE")
+    private double dose;
 
-    @Column(name = "RAIN")
-    private boolean rain;
+    @Column(name = "CULTIVATED_PLANT")
+    private String cultivatedPlant;
 
-    @Column(name = "WEATHER_STATUS")
-    private boolean isWeatherOk;
+    @ManyToOne
+    @JoinColumn(name = "PARCEL_ID")
+    private Parcel parcel;
 
 
 }
