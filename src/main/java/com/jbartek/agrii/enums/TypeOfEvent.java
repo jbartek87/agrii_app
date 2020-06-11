@@ -1,4 +1,4 @@
-package com.jbartek.agrii.domain;
+package com.jbartek.agrii.enums;
 
 public enum TypeOfEvent {
     INCOME, EXPENDITURE

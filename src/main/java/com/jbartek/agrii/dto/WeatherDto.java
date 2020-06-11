@@ -1,4 +1,4 @@
-package com.jbartek.agrii.domain;
+package com.jbartek.agrii.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

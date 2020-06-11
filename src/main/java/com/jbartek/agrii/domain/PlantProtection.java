@@ -3,23 +3,34 @@ package com.jbartek.agrii.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Weather {
+public class PlantProtection {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", unique = true)
     private long id;
-    private String city;
+
+    @Column(name = "PRODUCT_NAME")
+    private String productName;
+
+    @Column(name = "TEMPERATURE")
     private double temperature;
+
+    @Column(name = "WIND_SPEED")
     private double windSpeed;
+
+    @Column(name = "RAIN")
     private boolean rain;
+
+    @Column(name = "WEATHER_STATUS")
     private boolean isWeatherOk;
+
+
 }

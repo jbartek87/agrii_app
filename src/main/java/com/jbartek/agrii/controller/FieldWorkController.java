@@ -1,17 +1,12 @@
 package com.jbartek.agrii.controller;
 
-import com.jbartek.agrii.domain.FieldWork;
-import com.jbartek.agrii.domain.FieldWorkDto;
-import com.jbartek.agrii.domain.ParcelDto;
+import com.jbartek.agrii.dto.FieldWorkDto;
 import com.jbartek.agrii.exceptions.FieldWorkNotFoundException;
 import com.jbartek.agrii.mapper.FieldWorkMapper;
-import com.jbartek.agrii.repository.FieldWorkRepository;
 import com.jbartek.agrii.services.FieldWorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sun.reflect.generics.repository.FieldRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

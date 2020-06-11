@@ -1,5 +1,6 @@
-package com.jbartek.agrii.domain;
+package com.jbartek.agrii.dto;
 
+import com.jbartek.agrii.enums.TypeOfWork;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,8 @@ import java.time.LocalDate;
 public class FieldWorkDto {
     private long id;
     private LocalDate dateOfWork;
-    private long parcelId;
     private String cultivatedPlant;
-    private String typeOfWork;
+    private TypeOfWork typeOfWork;
     private String comments;
+    private long parcelId;
 }

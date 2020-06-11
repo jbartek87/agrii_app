@@ -1,5 +1,6 @@
-package com.jbartek.agrii.domain;
+package com.jbartek.agrii.dto;
 
+import com.jbartek.agrii.enums.TypeOfEvent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,5 @@ public class AccountancyDto {
     private int vatRate;
     private BigDecimal netTotalSum;
     private BigDecimal totalSum;
+
 }

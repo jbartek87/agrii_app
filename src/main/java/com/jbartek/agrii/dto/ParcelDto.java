@@ -1,5 +1,6 @@
-package com.jbartek.agrii.domain;
+package com.jbartek.agrii.dto;
 
+import com.jbartek.agrii.enums.SoilType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,6 @@ public class ParcelDto {
     private String communeName;
     private SoilType soilType;
     private double area;
-    private List<FieldWork> fieldWorkList;
+    private List<FieldWorkDto> fieldWorkDtoList;
 
 }

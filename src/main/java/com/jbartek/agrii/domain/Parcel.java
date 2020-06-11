@@ -1,8 +1,8 @@
 package com.jbartek.agrii.domain;
 
+import com.jbartek.agrii.enums.SoilType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -16,10 +16,19 @@ import java.util.List;
 public class Parcel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", unique = true)
     private long id;
+
+    @Column(name = "PARCEL_NUMBER")
     private String parcelNumber;
-    private String communeName;
+
+    @Column(name = "PRECINCT")
+    private String precinct;
+
+    @Column(name = "SOIL_TYPE")
     private SoilType soilType;
+
+    @Column(name = "AREA")
     private double area;
 
     @OneToMany(
@@ -31,4 +40,10 @@ public class Parcel {
     )
     private List<FieldWork>  fieldWorkList = new ArrayList<>();
 
+    public Parcel(String parcelNumber, String precinct, SoilType soilType, Double area) {
+        this.parcelNumber = parcelNumber;
+        this.precinct = precinct;
+        this.soilType = soilType;
+        this.area = area;
+    }
 }

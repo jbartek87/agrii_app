@@ -1,7 +1,6 @@
 package com.jbartek.agrii.controller;
 
-import com.jbartek.agrii.domain.ParcelDto;
-import com.jbartek.agrii.domain.SoilType;
+import com.jbartek.agrii.dto.ParcelDto;
 import com.jbartek.agrii.exceptions.ParcelNotFoundException;
 import com.jbartek.agrii.mapper.ParcelMapper;
 import com.jbartek.agrii.services.ParcelService;

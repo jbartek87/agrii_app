@@ -1,7 +1,9 @@
 package com.jbartek.agrii.mapper;
 
 import com.jbartek.agrii.domain.Accountancy;
-import com.jbartek.agrii.domain.AccountancyDto;
+import com.jbartek.agrii.dto.AccountancyDto;
+import com.jbartek.agrii.services.AccountancyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,6 +11,11 @@ import java.util.stream.Collectors;
 
 @Component
 public class AccountancyMapper {
+
+    @Autowired
+    AccountancyService service;
+
+
     public Accountancy mapToAccountancy(final AccountancyDto accountancyDto){
         return new Accountancy(
                 accountancyDto.getId(),

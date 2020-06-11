@@ -1,6 +1,6 @@
 package com.jbartek.agrii.controller;
 
-import com.jbartek.agrii.domain.AccountancyDto;
+import com.jbartek.agrii.dto.AccountancyDto;
 import com.jbartek.agrii.exceptions.AccountancyNotFoundException;
 import com.jbartek.agrii.mapper.AccountancyMapper;
 import com.jbartek.agrii.services.AccountancyService;

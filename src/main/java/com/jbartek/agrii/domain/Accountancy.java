@@ -1,9 +1,9 @@
 package com.jbartek.agrii.domain;
 
+import com.jbartek.agrii.enums.TypeOfEvent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -36,6 +36,8 @@ public class Accountancy {
     private BigDecimal netTotalSum;
     @Column
     private BigDecimal totalSum;
+
+
 
 
 }
