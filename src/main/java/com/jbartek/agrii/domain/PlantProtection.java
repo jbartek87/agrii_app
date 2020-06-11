@@ -1,6 +1,7 @@
 package com.jbartek.agrii.domain;
 
 import com.jbartek.agrii.enums.ProtectionType;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,7 +37,15 @@ public class PlantProtection {
 
     @ManyToOne
     @JoinColumn(name = "PARCEL_ID")
+    @NotNull
     private Parcel parcel;
 
-
+    public PlantProtection(LocalDate dateOfWork,String productName, ProtectionType protectionType, double dose, String cultivatedPlant, Parcel parcel) {
+        this.dateOfWork = dateOfWork;
+        this.productName = productName;
+        this.protectionType = protectionType;
+        this.dose = dose;
+        this.cultivatedPlant = cultivatedPlant;
+        this.parcel = parcel;
+    }
 }

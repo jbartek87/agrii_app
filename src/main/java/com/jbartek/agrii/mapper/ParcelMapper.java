@@ -1,9 +1,10 @@
 package com.jbartek.agrii.mapper;
 
-import com.jbartek.agrii.domain.FieldWork;
+
 import com.jbartek.agrii.domain.Parcel;
 import com.jbartek.agrii.dto.ParcelDto;
 import com.jbartek.agrii.services.FieldWorkService;
+import com.jbartek.agrii.services.PlantProtectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,12 @@ public class ParcelMapper {
     @Autowired
     FieldWorkMapper fieldWorkMapper;
 
+    @Autowired
+    PlantProtectionService plantProtectionService;
+
+    @Autowired
+    PlantProtectionMapper plantProtectionMapper;
+
     public Parcel mapToParcel(final ParcelDto parcelDto){
         return new Parcel(
                 parcelDto.getId(),
@@ -26,7 +33,8 @@ public class ParcelMapper {
                 parcelDto.getCommuneName(),
                 parcelDto.getSoilType(),
                 parcelDto.getArea(),
-                fieldWorkService.getAllFieldWork());
+                fieldWorkService.getAllFieldWork(),
+                plantProtectionService.getAllPlantProtection());
     }
 
     public ParcelDto mapToParcelDto(final Parcel parcel){
@@ -36,7 +44,9 @@ public class ParcelMapper {
                 parcel.getPrecinct(),
                 parcel.getSoilType(),
                 parcel.getArea(),
-                fieldWorkMapper.mapToFieldWorkDtoList(parcel.getFieldWorkList()));
+                fieldWorkMapper.mapToFieldWorkDtoList(parcel.getFieldWorkList()),
+                plantProtectionMapper.mapToPlantProtectionDtoList(parcel.getPlantProtectionList()));
+
     }
 
     public List<ParcelDto> mapToParcelDtoList(final List<Parcel> parcelList) {
@@ -47,7 +57,8 @@ public class ParcelMapper {
                         p.getPrecinct(),
                         p.getSoilType(),
                         p.getArea(),
-                        fieldWorkMapper.mapToFieldWorkDtoList(p.getFieldWorkList())))
+                        fieldWorkMapper.mapToFieldWorkDtoList(p.getFieldWorkList()),
+                        plantProtectionMapper.mapToPlantProtectionDtoList(p.getPlantProtectionList())))
                 .collect(Collectors.toList());
     }
 

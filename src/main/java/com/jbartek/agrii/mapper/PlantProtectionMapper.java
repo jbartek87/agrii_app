@@ -1,7 +1,10 @@
 package com.jbartek.agrii.mapper;
 
 import com.jbartek.agrii.domain.PlantProtection;
+import com.jbartek.agrii.dto.PlantProtectionDto;
 import com.jbartek.agrii.dto.WeatherDto;
+import com.jbartek.agrii.services.ParcelService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,35 +12,55 @@ import java.util.stream.Collectors;
 
 @Component
 public class PlantProtectionMapper {
-    public PlantProtection mapToWeather(final WeatherDto weatherDto){
+
+    @Autowired
+    ParcelService parcelService;
+
+
+    public PlantProtection mapToPlantProtection(final PlantProtectionDto plantProtectionDto) {
         return new PlantProtection(
-                weatherDto.getId(),
-                weatherDto.getCity(),
-                weatherDto.getTemperature(),
-                weatherDto.getWindSpeed(),
-                weatherDto.isRain(),
-                weatherDto.isWeatherOk());
+                plantProtectionDto.getDateOfWork(),
+                plantProtectionDto.getProductName(),
+                plantProtectionDto.getProtectionType(),
+                plantProtectionDto.getDose(),
+                plantProtectionDto.getCultivatedPlant(),
+                parcelService.getParcel(plantProtectionDto.getId()).orElse(null));
     }
 
-    public WeatherDto mapToWeatherDto(final PlantProtection plantProtection) {
-        return new WeatherDto(
+    public PlantProtectionDto mapToPlantProtectionDto(final PlantProtection plantProtection) {
+        return new PlantProtectionDto(
                 plantProtection.getId(),
-                plantProtection.getCity(),
-                plantProtection.getTemperature(),
-                plantProtection.getWindSpeed(),
-                plantProtection.isRain(),
-                plantProtection.isWeatherOk());
+                plantProtection.getDateOfWork(),
+                plantProtection.getProductName(),
+                plantProtection.getProtectionType(),
+                plantProtection.getDose(),
+                plantProtection.getCultivatedPlant(),
+                plantProtection.getParcel().getId());
+
     }
 
-    public List<WeatherDto> mapToWeatherDtoList(final List<PlantProtection> plantProtectionList){
+    public List<PlantProtectionDto> mapToPlantProtectionDtoList(final List<PlantProtection> plantProtectionList) {
         return plantProtectionList.stream()
-                .map(w->new WeatherDto(
-                        w.getId(),
-                        w.getCity(),
-                        w.getTemperature(),
-                        w.getWindSpeed(),
-                        w.isRain(),
-                        w.isWeatherOk()))
+                .map(p -> new PlantProtectionDto(
+                        p.getId(),
+                        p.getDateOfWork(),
+                        p.getProductName(),
+                        p.getProtectionType(),
+                        p.getDose(),
+                        p.getCultivatedPlant(),
+                        p.getParcel().getId()))
+                .collect(Collectors.toList());
+    }
+
+    public List<PlantProtection> mapToPlantProtectionList(final List<PlantProtectionDto> plantProtectionDtoList){
+        return plantProtectionDtoList.stream()
+                .map(p->new PlantProtection(
+                        p.getDateOfWork(),
+                        p.getProductName(),
+                        p.getProtectionType(),
+                        p.getDose(),
+                        p.getCultivatedPlant(),
+                        parcelService.getParcel(p.getId()).orElse(null)))
                 .collect(Collectors.toList());
     }
 }
