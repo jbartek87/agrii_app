@@ -14,10 +14,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "PLANT_PROTECTION")
 public class PlantProtection {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID", unique = true)
+    @Column(name = "ID")
     private long id;
 
     @Column(name = "DATE_OF_WORK")

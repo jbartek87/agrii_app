@@ -29,9 +29,5 @@ public class ParcelService {
         parcelRepository.deleteById(id);
     }
 
-    public long getParcelId(long id){
-        return parcelRepository.findById(id).get().getId();
-
-    }
 
 }

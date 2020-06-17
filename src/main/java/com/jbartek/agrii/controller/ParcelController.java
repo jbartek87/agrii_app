@@ -29,7 +29,7 @@ public class ParcelController {
         return parcelMapper.mapToParcelDto(service.getParcel(id).orElseThrow(ParcelNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/parcels")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/parcels/{id}")
     public void deleteParcel(@PathVariable Long id){
         service.deleteParcel(id);
     }

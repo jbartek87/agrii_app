@@ -14,10 +14,11 @@ import java.util.List;
 public class ParcelDto {
     private long id;
     private String parcelNumber;
-    private String communeName;
+    private String precinct;
     private SoilType soilType;
     private double area;
     private List<FieldWorkDto> fieldWorkDtoList;
     private List<PlantProtectionDto> plantProtectionDtoList;
+    private long userId;
 
 }

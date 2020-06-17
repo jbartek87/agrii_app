@@ -1,17 +1,24 @@
 package com.jbartek.agrii.dto;
 
+
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter
+import java.util.List;
+
+
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
     private long id;
-    private String name;
+    private String firstName;
     private String lastName;
-    private String city;
+    private String farmNumber;
     private String email;
     private String password;
+//    private List<ParcelDto> parcelDtoList;
 }

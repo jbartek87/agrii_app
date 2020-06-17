@@ -2,6 +2,7 @@ package com.jbartek.agrii.mapper;
 
 import com.jbartek.agrii.domain.FieldWork;
 import com.jbartek.agrii.dto.FieldWorkDto;
+import com.jbartek.agrii.repository.ParcelRepository;
 import com.jbartek.agrii.services.ParcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 public class FieldWorkMapper {
 
     @Autowired
-    ParcelService parcelService;
+    ParcelService service;
 
 
 
@@ -23,7 +24,7 @@ public class FieldWorkMapper {
                 fieldWorkDto.getCultivatedPlant(),
                 fieldWorkDto.getTypeOfWork(),
                 fieldWorkDto.getComments(),
-                parcelService.getParcel(fieldWorkDto.getId()).orElse(null));
+                service.getParcel(fieldWorkDto.getParcelId()).orElse(null));
     }
 
     public FieldWorkDto mapToFieldWorkDto(final FieldWork fieldWork){
@@ -44,7 +45,7 @@ public class FieldWorkMapper {
                         f.getCultivatedPlant(),
                         f.getTypeOfWork(),
                         f.getComments(),
-                        f.getId()))
+                        f.getParcel().getId()))
                 .collect(Collectors.toList());
     }
 
@@ -56,7 +57,7 @@ public class FieldWorkMapper {
                         f.getCultivatedPlant(),
                         f.getTypeOfWork(),
                         f.getComments(),
-                        parcelService.getParcel(f.getId()).orElse(null)))
+                        service.getParcel(f.getParcelId()).orElse(null)))
                 .collect(Collectors.toList());
     }
 

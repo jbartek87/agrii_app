@@ -5,6 +5,7 @@ import com.jbartek.agrii.domain.Parcel;
 import com.jbartek.agrii.dto.ParcelDto;
 import com.jbartek.agrii.services.FieldWorkService;
 import com.jbartek.agrii.services.PlantProtectionService;
+import com.jbartek.agrii.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,15 +27,20 @@ public class ParcelMapper {
     @Autowired
     PlantProtectionMapper plantProtectionMapper;
 
+    @Autowired
+    UserService userService;
+
     public Parcel mapToParcel(final ParcelDto parcelDto){
         return new Parcel(
                 parcelDto.getId(),
                 parcelDto.getParcelNumber(),
-                parcelDto.getCommuneName(),
+                parcelDto.getPrecinct(),
                 parcelDto.getSoilType(),
                 parcelDto.getArea(),
                 fieldWorkService.getAllFieldWork(),
-                plantProtectionService.getAllPlantProtection());
+                plantProtectionService.getAllPlantProtection(),
+                userService.getUser(parcelDto.getUserId()).orElse(null));
+
     }
 
     public ParcelDto mapToParcelDto(final Parcel parcel){
@@ -45,7 +51,8 @@ public class ParcelMapper {
                 parcel.getSoilType(),
                 parcel.getArea(),
                 fieldWorkMapper.mapToFieldWorkDtoList(parcel.getFieldWorkList()),
-                plantProtectionMapper.mapToPlantProtectionDtoList(parcel.getPlantProtectionList()));
+                plantProtectionMapper.mapToPlantProtectionDtoList(parcel.getPlantProtectionList()),
+                parcel.getUser().getId());
 
     }
 
@@ -58,8 +65,24 @@ public class ParcelMapper {
                         p.getSoilType(),
                         p.getArea(),
                         fieldWorkMapper.mapToFieldWorkDtoList(p.getFieldWorkList()),
-                        plantProtectionMapper.mapToPlantProtectionDtoList(p.getPlantProtectionList())))
+                        plantProtectionMapper.mapToPlantProtectionDtoList(p.getPlantProtectionList()),
+                        p.getUser().getId()))
                 .collect(Collectors.toList());
+    }
+
+    public List<Parcel> mapToParcelList(final List<ParcelDto> parcelDtoList){
+        return parcelDtoList.stream()
+                .map(p-> new Parcel(
+                        p.getId(),
+                        p.getParcelNumber(),
+                        p.getPrecinct(),
+                        p.getSoilType(),
+                        p.getArea(),
+                        fieldWorkMapper.mapToFieldWorkList(p.getFieldWorkDtoList()),
+                        plantProtectionMapper.mapToPlantProtectionList(p.getPlantProtectionDtoList()),
+                        userService.getUser(p.getUserId()).orElse(null)))
+                .collect(Collectors.toList());
+
     }
 
 }

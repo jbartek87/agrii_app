@@ -2,7 +2,6 @@ package com.jbartek.agrii.mapper;
 
 import com.jbartek.agrii.domain.PlantProtection;
 import com.jbartek.agrii.dto.PlantProtectionDto;
-import com.jbartek.agrii.dto.WeatherDto;
 import com.jbartek.agrii.services.ParcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,7 +23,7 @@ public class PlantProtectionMapper {
                 plantProtectionDto.getProtectionType(),
                 plantProtectionDto.getDose(),
                 plantProtectionDto.getCultivatedPlant(),
-                parcelService.getParcel(plantProtectionDto.getId()).orElse(null));
+                parcelService.getParcel(plantProtectionDto.getParcelId()).orElse(null));
     }
 
     public PlantProtectionDto mapToPlantProtectionDto(final PlantProtection plantProtection) {
@@ -48,7 +47,7 @@ public class PlantProtectionMapper {
                         p.getProtectionType(),
                         p.getDose(),
                         p.getCultivatedPlant(),
-                        p.getParcel().getId()))
+                       p.getParcel().getId()))
                 .collect(Collectors.toList());
     }
 
@@ -60,7 +59,7 @@ public class PlantProtectionMapper {
                         p.getProtectionType(),
                         p.getDose(),
                         p.getCultivatedPlant(),
-                        parcelService.getParcel(p.getId()).orElse(null)))
+                        parcelService.getParcel(p.getParcelId()).orElse(null)))
                 .collect(Collectors.toList());
     }
 }

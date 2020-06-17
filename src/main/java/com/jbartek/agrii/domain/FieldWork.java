@@ -12,12 +12,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity(name = "field_work")
+@Entity
+@Table(name = "FIELD_WORK")
 public class FieldWork {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column(name = "ID", unique = true)
+    @Column(name = "ID")
     private long id;
 
     @Column(name="DATE_OF_WORK")
@@ -34,13 +35,12 @@ public class FieldWork {
 
     @ManyToOne
     @JoinColumn(name = "PARCEL_ID")
-    @NotNull
     private Parcel parcel;
 
 
     public FieldWork(LocalDate dateOfWork, String cultivatedPlant, TypeOfWork typeOfWork, String comments, Parcel parcel) {
         this.dateOfWork = dateOfWork;
-        this.comments = cultivatedPlant;
+        this.cultivatedPlant = cultivatedPlant;
         this.typeOfWork = typeOfWork;
         this.comments = comments;
         this.parcel = parcel;
