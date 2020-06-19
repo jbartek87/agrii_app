@@ -1,7 +1,9 @@
 package com.jbartek.agrii.controller;
 
+import com.jbartek.agrii.domain.Accountancy;
 import com.jbartek.agrii.dto.AccountancyDto;
 import com.jbartek.agrii.exceptions.AccountancyNotFoundException;
+import com.jbartek.agrii.facade.AccountancyFacade;
 import com.jbartek.agrii.mapper.AccountancyMapper;
 import com.jbartek.agrii.services.AccountancyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,34 +16,30 @@ import java.util.List;
 @CrossOrigin("*")
 public class AccountancyController {
     @Autowired
-    AccountancyMapper accountancyMapper;
+    AccountancyFacade facade;
 
-    @Autowired
-    AccountancyService service;
-
-    @RequestMapping(method = RequestMethod.GET, value = "/accountancy")
-    List<AccountancyDto> getAllAccountancy() {
-        return accountancyMapper.mapToAccountancyDtoList(service.getAllAccountancy());
+    @GetMapping(value = "/accountancy")
+    public List<AccountancyDto> getAllAccountancy() {
+        return facade.fetchAllAccountancy();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/accountancy/{id}")
-    public AccountancyDto getAccountancy(@PathVariable Long id) throws AccountancyNotFoundException {
-        return accountancyMapper.mapToAccountancyDto(service.getAccountancy(id).orElseThrow(AccountancyNotFoundException::new));
+    @GetMapping(value = "/accountancy/{accountancyId}")
+    public AccountancyDto getAccountancy(@PathVariable Long accountancyId) throws AccountancyNotFoundException {
+        return facade.fetchAccountancy(accountancyId).orElseThrow(AccountancyNotFoundException::new);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/accountancy")
+    @DeleteMapping(value = "/accountancy/{accountancyid}")
+    public void deleteAccountancy(@PathVariable Long accountancyId) {
+        facade.deleteAccountancy(accountancyId);
+    }
+
+    @PutMapping(value = "/accountancy")
     public AccountancyDto updateAccountancy(@RequestBody AccountancyDto accountancyDto) {
-        return accountancyMapper.mapToAccountancyDto(service.saveAccountancy(accountancyMapper.mapToAccountancy(accountancyDto)));
+        return facade.updateAccountancy(accountancyDto);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/accountancy/{id}")
-    public void deleteAccountancy(@PathVariable Long id){
-        service.deleteAccountancy(id);
+    @PostMapping(value = "/accountancy")
+    public void createAccountancy(@RequestBody AccountancyDto accountancyDto) {
+        facade.createAccountancy(accountancyDto);
     }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/accountancy")
-    public void createAccountancy(@RequestBody AccountancyDto accountancyDto){
-        service.saveAccountancy(accountancyMapper.mapToAccountancy(accountancyDto));
-    }
-
 }

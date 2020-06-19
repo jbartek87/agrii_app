@@ -42,11 +42,11 @@ public class User {
     )
     private List<Parcel> parcelList = new ArrayList<>();
 
-    public User(String firstName, String farmNumber, String email, String password){
+    public User(String firstName, String lastName,String farmNumber, String email){
         this.firstName = firstName;
+        this.lastName = lastName;
         this.farmNumber = farmNumber;
         this.email = email;
-        this.password = password;
         this.parcelList = new ArrayList<>();
     }
 
