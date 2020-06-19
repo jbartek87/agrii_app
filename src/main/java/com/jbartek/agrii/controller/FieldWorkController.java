@@ -21,14 +21,14 @@ public class FieldWorkController {
         return facade.fetchAllFieldWork();
     }
 
-    @GetMapping(value = "/fieldWork/{fieldWorkId}")
-    public FieldWorkDto getFieldWork(@PathVariable Long fieldWorkId) throws FieldWorkNotFoundException{
-        return facade.fetchFieldWork(fieldWorkId).orElseThrow(FieldWorkNotFoundException::new);
+    @GetMapping(value = "/fieldWork/{id}")
+    public FieldWorkDto getFieldWork(@PathVariable Long id) throws FieldWorkNotFoundException{
+        return facade.fetchFieldWork(id).orElseThrow(FieldWorkNotFoundException::new);
     }
 
-    @DeleteMapping(value = "/fieldWork/{fieldWorkId}")
-    public void deleteFieldWork(@PathVariable Long fieldWorkId){
-        facade.deleteFieldWork(fieldWorkId);
+    @DeleteMapping(value = "/fieldWork/{id}")
+    public void deleteFieldWork(@PathVariable Long id){
+        facade.deleteFieldWork(id);
     }
 
     @PutMapping(value = "/fieldWork")

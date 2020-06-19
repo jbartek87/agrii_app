@@ -1,8 +1,10 @@
 package com.jbartek.agrii.controller;
 
 
+import com.jbartek.agrii.domain.PlantProtection;
 import com.jbartek.agrii.dto.PlantProtectionDto;
 import com.jbartek.agrii.exceptions.PlantProtectionException;
+import com.jbartek.agrii.facade.PlantProtectionFacade;
 import com.jbartek.agrii.mapper.PlantProtectionMapper;
 import com.jbartek.agrii.services.PlantProtectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,33 +17,30 @@ import java.util.List;
 @CrossOrigin("*")
 public class PlantProtectionController {
     @Autowired
-    PlantProtectionService service;
+    PlantProtectionFacade facade;
 
-    @Autowired
-    PlantProtectionMapper mapper;
-
-    @RequestMapping(method = RequestMethod.GET, value = "/plantProtection")
-    List<PlantProtectionDto> getAllPlantProtections(){
-        return mapper.mapToPlantProtectionDtoList(service.getAllPlantProtection());
+    @GetMapping(value = "/plantProtection")
+    List<PlantProtectionDto> getAllPlantProtections() {
+        return facade.fetchAllPlantProtection();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/plantProtection/{id}")
+    @GetMapping(value = "/plantProtection/{id}")
     public PlantProtectionDto getPlantProtection(@PathVariable Long id) throws PlantProtectionException {
-        return mapper.mapToPlantProtectionDto(service.getPlantProtection(id).orElseThrow(PlantProtectionException::new));
+        return facade.fetchPlantProtection(id).orElseThrow(PlantProtectionException::new);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/plantProtection/{id}")
-    public void deletePlantProtection(@PathVariable Long id){
-        service.deletePlantProtection(id);
+    @DeleteMapping(value = "/plantProtection/{id}")
+    public void deletePlantProtection(@PathVariable Long id) {
+        facade.deletePlantProtection(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/plantProtection")
-    public void createPlantProtection(@RequestBody PlantProtectionDto plantProtectionDto){
-        service.savePlantProtection(mapper.mapToPlantProtection(plantProtectionDto));
+    @PostMapping(value = "/plantProtection")
+    public void createPlantProtection(@RequestBody PlantProtectionDto plantProtectionDto) {
+        facade.createPlantProtection(plantProtectionDto);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/plantProtection")
-    public PlantProtectionDto updatePlantProtection(@RequestBody PlantProtectionDto plantProtectionDto){
-        return mapper.mapToPlantProtectionDto(service.savePlantProtection(mapper.mapToPlantProtection(plantProtectionDto)));
+    @PutMapping(value = "/plantProtection")
+    public PlantProtectionDto updatePlantProtection(@RequestBody PlantProtectionDto plantProtectionDto) {
+        return facade.updatePlantProtection(plantProtectionDto);
     }
 }

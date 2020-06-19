@@ -2,6 +2,7 @@ package com.jbartek.agrii.controller;
 
 import com.jbartek.agrii.dto.ParcelDto;
 import com.jbartek.agrii.exceptions.ParcelNotFoundException;
+import com.jbartek.agrii.facade.ParcelFacade;
 import com.jbartek.agrii.mapper.ParcelMapper;
 import com.jbartek.agrii.services.ParcelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,33 +15,30 @@ import java.util.List;
 @CrossOrigin("*")
 public class ParcelController {
     @Autowired
-    ParcelService service;
+    ParcelFacade facade;
 
-    @Autowired
-    ParcelMapper parcelMapper;
-
-    @RequestMapping(method = RequestMethod.GET, value = "/parcels")
-    List<ParcelDto> getParcels() {
-        return parcelMapper.mapToParcelDtoList(service.getAllParcels());
+    @GetMapping(value = "/parcels")
+    public List<ParcelDto> getParcels() {
+        return facade.fetchAllParcels();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/parcels/{id}")
+    @GetMapping(value = "/parcels/{id}")
     public ParcelDto getParcel(@PathVariable Long id) throws ParcelNotFoundException {
-        return parcelMapper.mapToParcelDto(service.getParcel(id).orElseThrow(ParcelNotFoundException::new));
+        return facade.fetchParcel(id).orElseThrow(ParcelNotFoundException::new);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/parcels/{id}")
-    public void deleteParcel(@PathVariable Long id){
-        service.deleteParcel(id);
+    @DeleteMapping(value = "/parcels/{id}")
+    public void deleteParcel(@PathVariable Long id) {
+        facade.deleteParcel(id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/parcels")
-    public ParcelDto updateParcel(@RequestBody ParcelDto parcelDto){
-        return parcelMapper.mapToParcelDto(service.saveParcel(parcelMapper.mapToParcel(parcelDto)));
+    @PutMapping(value = "/parcels")
+    public ParcelDto updateParcel(@RequestBody ParcelDto parcelDto) {
+        return facade.updateParcel(parcelDto);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/createParcels")
-    public void createParcel(@RequestBody ParcelDto parcelDto){
-        service.saveParcel(parcelMapper.mapToParcel(parcelDto));
+    @PostMapping(value = "/parcels")
+    public void createParcel(@RequestBody ParcelDto parcelDto) {
+        facade.createParcel(parcelDto);
     }
 }

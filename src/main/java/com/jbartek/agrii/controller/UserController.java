@@ -3,6 +3,7 @@ package com.jbartek.agrii.controller;
 
 import com.jbartek.agrii.dto.UserDto;
 import com.jbartek.agrii.exceptions.UserNotFoundException;
+import com.jbartek.agrii.facade.UserFacade;
 import com.jbartek.agrii.mapper.UserMapper;
 import com.jbartek.agrii.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,34 +17,31 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserMapper mapper;
-
-    @Autowired
-    UserService service;
+    UserFacade facade;
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/users")
+    @GetMapping( value = "/users")
     public List<UserDto> getUsers(){
-        return mapper.mapToUserDtoList(service.getAllUsers());
+        return facade.fetchUsers();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/users/{id}")
+    @GetMapping( value = "/users/{id}")
     public UserDto getUser(@PathVariable Long id) throws UserNotFoundException {
-        return mapper.mapToUserDto(service.getUser(id).orElseThrow(UserNotFoundException::new));
+        return facade.fetchUser(id).orElseThrow(UserNotFoundException::new);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/users")
+    @PutMapping(value = "/users")
     public void updateUser(@RequestBody UserDto userDto){
-        mapper.mapToUserDto(service.saveUser(mapper.mapToUser(userDto)));
+        facade.updateUser(userDto);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/users/{id}")
+    @DeleteMapping(value = "/users/{id}")
     public void deleteUser(@PathVariable Long id){
-        service.deleteUser(id);
+        facade.deleteUser(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/users")
+    @PostMapping( value = "/users")
     public void createUser(@RequestBody UserDto userDto){
-        service.saveUser(mapper.mapToUser(userDto));
+        facade.createUser(userDto);
     }
 }

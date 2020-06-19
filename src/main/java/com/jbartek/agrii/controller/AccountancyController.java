@@ -23,14 +23,14 @@ public class AccountancyController {
         return facade.fetchAllAccountancy();
     }
 
-    @GetMapping(value = "/accountancy/{accountancyId}")
+    @GetMapping(value = "/accountancy/{id}")
     public AccountancyDto getAccountancy(@PathVariable Long accountancyId) throws AccountancyNotFoundException {
         return facade.fetchAccountancy(accountancyId).orElseThrow(AccountancyNotFoundException::new);
     }
 
     @DeleteMapping(value = "/accountancy/{accountancyid}")
-    public void deleteAccountancy(@PathVariable Long accountancyId) {
-        facade.deleteAccountancy(accountancyId);
+    public void deleteAccountancy(@PathVariable Long id) {
+        facade.deleteAccountancy(id);
     }
 
     @PutMapping(value = "/accountancy")
