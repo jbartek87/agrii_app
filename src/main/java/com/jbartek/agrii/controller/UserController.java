@@ -1,11 +1,14 @@
 package com.jbartek.agrii.controller;
 
 
+import com.jbartek.agrii.domain.logs.ApplicationLogs;
 import com.jbartek.agrii.dto.UserDto;
+import com.jbartek.agrii.enums.LogType;
 import com.jbartek.agrii.exceptions.UserNotFoundException;
 import com.jbartek.agrii.facade.UserFacade;
 import com.jbartek.agrii.mapper.UserMapper;
 import com.jbartek.agrii.services.UserService;
+import com.jbartek.agrii.services.logs.ApplicationLogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +21,9 @@ public class UserController {
 
     @Autowired
     UserFacade facade;
+
+    @Autowired
+    ApplicationLogsService service;
 
 
     @GetMapping( value = "/users")
@@ -32,16 +38,28 @@ public class UserController {
 
     @PutMapping(value = "/users")
     public void updateUser(@RequestBody UserDto userDto){
+        UserDto tempUser = facade.updateUser(userDto);
+        if(tempUser!=null){
+            service.saveLog(new ApplicationLogs(LogType.UPDATED, "User " + tempUser.getLastName() +
+                    "was updated"));
+        }
         facade.updateUser(userDto);
     }
 
     @DeleteMapping(value = "/users/{id}")
     public void deleteUser(@PathVariable Long id){
+        UserDto tempUser = facade.fetchUser(id).orElse(null);
+        if(tempUser!=null){
+            service.saveLog(new ApplicationLogs(LogType.DELETED, "User" + tempUser.getLastName() +
+                    " was deleted"));
+        }
         facade.deleteUser(id);
     }
 
     @PostMapping( value = "/users")
     public void createUser(@RequestBody UserDto userDto){
         facade.createUser(userDto);
+        service.saveLog(new ApplicationLogs(LogType.CREATED, "User" + userDto.getLastName() +
+                " was created"));
     }
 }

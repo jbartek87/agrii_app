@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class ApplicationLogsMapper {
-    public ApplicationLogs mapToApplicationLogsDto(ApplicationLogsDto applicationLogsDto){
+    public ApplicationLogs mapToApplicationLogs(ApplicationLogsDto applicationLogsDto){
         return new ApplicationLogs(
                 applicationLogsDto.getType(),
                 applicationLogsDto.getName());
