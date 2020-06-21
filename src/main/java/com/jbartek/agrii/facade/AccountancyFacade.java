@@ -6,17 +6,24 @@ import com.jbartek.agrii.mapper.AccountancyMapper;
 import com.jbartek.agrii.services.AccountancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class AccountancyFacade {
-    @Autowired
+
     AccountancyService service;
 
-    @Autowired
+
     AccountancyMapper mapper;
+
+    @Autowired
+    public AccountancyFacade(AccountancyService service, AccountancyMapper accountancyMapper) {
+        this.service = service;
+        this.mapper = accountancyMapper;
+    }
 
     public List<AccountancyDto> fetchAllAccountancy(){
         return mapper.mapToAccountancyDtoList(service.getAllAccountancy());

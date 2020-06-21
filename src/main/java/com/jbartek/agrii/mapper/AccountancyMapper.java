@@ -12,8 +12,6 @@ import java.util.stream.Collectors;
 @Component
 public class AccountancyMapper {
 
-    @Autowired
-    AccountancyService service;
 
 
     public Accountancy mapToAccountancy(final AccountancyDto accountancyDto){
