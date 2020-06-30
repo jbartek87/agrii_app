@@ -29,4 +29,8 @@ public class PlantProtectionService {
     public void deletePlantProtection(final long id){
         repository.deleteById(id);
     }
+
+    public List<PlantProtection> getPlantProtectionByEmail(String email) {
+        return repository.findByParcel_UserEmail(email);
+    }
 }

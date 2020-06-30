@@ -3,6 +3,7 @@ package com.jbartek.agrii.domain;
 import com.jbartek.agrii.enums.ProtectionType;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "PLANT_PROTECTION")
 public class PlantProtection {
     @Id
@@ -37,7 +39,7 @@ public class PlantProtection {
     private String cultivatedPlant;
 
     @ManyToOne
-    @JoinColumn(name = "PARCEL_ID")
+//    @JoinColumn(name = "PARCEL_ID")
     @NotNull
     private Parcel parcel;
 

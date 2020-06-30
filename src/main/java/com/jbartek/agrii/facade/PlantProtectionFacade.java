@@ -38,4 +38,8 @@ public class PlantProtectionFacade {
         service.savePlantProtection(mapper.mapToPlantProtection(plantProtectionDto));
     }
 
+    public List<PlantProtectionDto> fetchPlantProtectionByEmail(String email){
+        return mapper.mapToPlantProtectionDtoList(service.getPlantProtectionByEmail(email));
+    }
+
 }

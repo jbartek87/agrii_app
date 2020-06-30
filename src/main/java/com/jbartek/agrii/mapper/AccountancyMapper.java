@@ -15,31 +15,34 @@ public class AccountancyMapper {
 
 
     public Accountancy mapToAccountancy(final AccountancyDto accountancyDto){
-        return new Accountancy(
-                accountancyDto.getId(),
-                accountancyDto.getDateOfEvent(),
-                accountancyDto.getTypeOfEvent(),
-                accountancyDto.getInvoiceNumber(),
-                accountancyDto.getProduct(),
-                accountancyDto.getProductQuantity(),
-                accountancyDto.getNetUnitPrice(),
-                accountancyDto.getVatRate(),
-                accountancyDto.getNetTotalSum(),
-                accountancyDto.getTotalSum());
+        return Accountancy.builder()
+                .id(accountancyDto.getId())
+                .dateOfEvent(accountancyDto.getDateOfEvent())
+                .typeOfEvent(accountancyDto.getTypeOfEvent())
+                .invoiceNumber(accountancyDto.getInvoiceNumber())
+                .product(accountancyDto.getProduct())
+                .netUnitPrice(accountancyDto.getNetUnitPrice())
+                .productQuantity(accountancyDto.getProductQuantity())
+                .vatRate(accountancyDto.getVatRate())
+                .netTotalSum(accountancyDto.getNetTotalSum())
+                .totalSum(accountancyDto.getTotalSum())
+                .build();
     }
 
     public AccountancyDto mapToAccountancyDto(final Accountancy accountancy) {
-        return new AccountancyDto(
-                accountancy.getId(),
-                accountancy.getDateOfEvent(),
-                accountancy.getTypeOfEvent(),
-                accountancy.getInvoiceNumber(),
-                accountancy.getProduct(),
-                accountancy.getProductQuantity(),
-                accountancy.getNetUnitPrice(),
-                accountancy.getVatRate(),
-                accountancy.getNetTotalSum(),
-                accountancy.getTotalSum());
+        return AccountancyDto.builder()
+                .id(accountancy.getId())
+                .dateOfEvent(accountancy.getDateOfEvent())
+                .typeOfEvent(accountancy.getTypeOfEvent())
+                .invoiceNumber(accountancy.getInvoiceNumber())
+                .product(accountancy.getProduct())
+                .netUnitPrice(accountancy.getNetUnitPrice())
+                .productQuantity(accountancy.getProductQuantity())
+                .vatRate(accountancy.getVatRate())
+                .netTotalSum(accountancy.getNetTotalSum())
+                .totalSum(accountancy.getTotalSum())
+                .userId(accountancy.getUser().getId())
+                .build();
     }
 
     public List<AccountancyDto> mapToAccountancyDtoList(final List<Accountancy> accountancyList){
@@ -54,7 +57,8 @@ public class AccountancyMapper {
                         a.getNetUnitPrice(),
                         a.getVatRate(),
                         a.getNetTotalSum(),
-                        a.getTotalSum()))
+                        a.getTotalSum(),
+                        a.getUser().getId()))
                 .collect(Collectors.toList());
     }
 }

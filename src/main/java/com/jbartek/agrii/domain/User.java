@@ -42,6 +42,14 @@ public class User {
     )
     private List<Parcel> parcelList = new ArrayList<>();
 
+    @OneToMany(
+            targetEntity = Accountancy.class,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Accountancy> accountancyList = new ArrayList<>();
+
     public User(String firstName, String lastName,String farmNumber, String email){
         this.firstName = firstName;
         this.lastName = lastName;

@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -34,7 +35,7 @@ public class FieldWork {
     private String comments;
 
     @ManyToOne
-    @JoinColumn(name = "PARCEL_ID")
+//    @JoinColumn(name = "PARCEL_ID")
     private Parcel parcel;
 
 

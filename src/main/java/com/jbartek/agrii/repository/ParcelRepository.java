@@ -23,5 +23,8 @@ public interface ParcelRepository extends CrudRepository<Parcel,Long> {
     void deleteById(Long id);
 
 
+    List<Parcel>findByUser_Email(String email);
+
+
 }
 

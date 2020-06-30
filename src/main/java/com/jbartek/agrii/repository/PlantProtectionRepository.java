@@ -21,4 +21,6 @@ public interface PlantProtectionRepository extends CrudRepository<PlantProtectio
     PlantProtection save(PlantProtection plantProtection);
 
     void deleteById(Long id);
+
+    List<PlantProtection> findByParcel_UserEmail(String email);
 }

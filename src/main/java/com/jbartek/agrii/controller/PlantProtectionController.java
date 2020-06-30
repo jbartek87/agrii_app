@@ -7,8 +7,6 @@ import com.jbartek.agrii.dto.PlantProtectionDto;
 import com.jbartek.agrii.enums.LogType;
 import com.jbartek.agrii.exceptions.PlantProtectionException;
 import com.jbartek.agrii.facade.PlantProtectionFacade;
-import com.jbartek.agrii.mapper.PlantProtectionMapper;
-import com.jbartek.agrii.services.PlantProtectionService;
 import com.jbartek.agrii.services.logs.ApplicationLogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +17,7 @@ import java.util.List;
 @RequestMapping("/v1")
 @CrossOrigin("*")
 public class PlantProtectionController {
+
     @Autowired
     PlantProtectionFacade facade;
 
@@ -28,6 +27,11 @@ public class PlantProtectionController {
     @GetMapping(value = "/plantProtection")
     List<PlantProtectionDto> getAllPlantProtections() {
         return facade.fetchAllPlantProtection();
+    }
+
+    @GetMapping(value = "/plantProtectionEmail/{email}")
+    List<PlantProtectionDto> getPlantProtectionByEmail(@PathVariable String email){
+        return facade.fetchPlantProtectionByEmail(email);
     }
 
     @GetMapping(value = "/plantProtection/{id}")

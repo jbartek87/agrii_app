@@ -62,4 +62,9 @@ public class UserController {
         service.saveLog(new ApplicationLogs(LogType.CREATED, "User" + userDto.getLastName() +
                 " was created"));
     }
+
+    @GetMapping(value = "/validate/{email}&{firstname}")
+    public Long validateUser(@PathVariable String email, @PathVariable String firstname){
+       return facade.validateUser(email, firstname);
+    }
 }

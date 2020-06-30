@@ -2,6 +2,7 @@ package com.jbartek.agrii.dto;
 
 import com.jbartek.agrii.enums.TypeOfEvent;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AccountancyDto {
     private long id;
     private LocalDate dateOfEvent;
@@ -22,5 +24,6 @@ public class AccountancyDto {
     private int vatRate;
     private BigDecimal netTotalSum;
     private BigDecimal totalSum;
+    private long userId;
 
 }

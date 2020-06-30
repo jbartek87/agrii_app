@@ -20,4 +20,6 @@ public interface UserRepository extends CrudRepository<User,Long> {
     User save(User user);
 
     void deleteById(Long id);
+
+    User findAllByEmailAndAndFirstName(String email, String firstName);
 }
