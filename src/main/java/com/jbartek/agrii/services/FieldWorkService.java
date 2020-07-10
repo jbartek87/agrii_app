@@ -30,4 +30,8 @@ public class FieldWorkService {
         repository.deleteById(id);
     }
 
+    public List<FieldWork> getFieldWorkByEmail(final String email) {
+        return repository.findByParcel_UserEmail(email);
+    }
+
 }

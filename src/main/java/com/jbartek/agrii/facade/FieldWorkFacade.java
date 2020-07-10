@@ -39,4 +39,8 @@ public class FieldWorkFacade {
     public void createFieldWork(FieldWorkDto fieldWorkDto){
        service.saveFieldWork(mapper.mapToFieldWork(fieldWorkDto));
     }
+
+    public List<FieldWorkDto> fetchFieldWorkByEmail(String email){
+        return mapper.mapToFieldWorkDtoList(service.getFieldWorkByEmail(email));
+    }
 }

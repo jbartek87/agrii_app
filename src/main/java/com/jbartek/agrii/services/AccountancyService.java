@@ -31,4 +31,8 @@ public class AccountancyService {
     public void deleteAccountancy(final long id) {
         accountancyRepository.deleteById(id);
     }
+
+    public List<Accountancy> getAccountancyByEmail(final String email) {
+        return     accountancyRepository.findByUser_Email(email);
+    }
 }

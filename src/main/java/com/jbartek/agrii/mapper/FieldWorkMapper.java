@@ -20,6 +20,7 @@ public class FieldWorkMapper {
 
     public FieldWork mapToFieldWork(final FieldWorkDto fieldWorkDto){
         return new FieldWork(
+                fieldWorkDto.getId(),
                 fieldWorkDto.getDateOfWork(),
                 fieldWorkDto.getCultivatedPlant(),
                 fieldWorkDto.getTypeOfWork(),

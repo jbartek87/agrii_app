@@ -1,6 +1,7 @@
 package com.jbartek.agrii.mapper;
 
 import com.jbartek.agrii.domain.Accountancy;
+import com.jbartek.agrii.domain.User;
 import com.jbartek.agrii.dto.AccountancyDto;
 import com.jbartek.agrii.services.AccountancyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class AccountancyMapper {
 
 
 
-    public Accountancy mapToAccountancy(final AccountancyDto accountancyDto){
+    public Accountancy mapToAccountancy(final AccountancyDto accountancyDto, final User user){
         return Accountancy.builder()
                 .id(accountancyDto.getId())
                 .dateOfEvent(accountancyDto.getDateOfEvent())
@@ -26,6 +27,7 @@ public class AccountancyMapper {
                 .vatRate(accountancyDto.getVatRate())
                 .netTotalSum(accountancyDto.getNetTotalSum())
                 .totalSum(accountancyDto.getTotalSum())
+                .user(user)
                 .build();
     }
 
@@ -47,18 +49,7 @@ public class AccountancyMapper {
 
     public List<AccountancyDto> mapToAccountancyDtoList(final List<Accountancy> accountancyList){
         return accountancyList.stream()
-                .map(a->new AccountancyDto(
-                        a.getId(),
-                        a.getDateOfEvent(),
-                        a.getTypeOfEvent(),
-                        a.getInvoiceNumber(),
-                        a.getProduct(),
-                        a.getProductQuantity(),
-                        a.getNetUnitPrice(),
-                        a.getVatRate(),
-                        a.getNetTotalSum(),
-                        a.getTotalSum(),
-                        a.getUser().getId()))
+                .map(this::mapToAccountancyDto)
                 .collect(Collectors.toList());
     }
 }

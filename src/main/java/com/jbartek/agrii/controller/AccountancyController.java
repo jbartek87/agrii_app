@@ -25,7 +25,7 @@ public class AccountancyController {
     ApplicationLogsService applicationLogsService;
 
     @GetMapping(value = "/accountancy")
-    public List<AccountancyDto> getAllAccountancy() throws Exception {
+    public List<AccountancyDto> getAllAccountancy() {
         return facade.fetchAllAccountancy();
     }
 
@@ -34,20 +34,26 @@ public class AccountancyController {
         return facade.fetchAccountancy(id).orElseThrow(AccountancyNotFoundException::new);
     }
 
-        @DeleteMapping(value = "/accountancy/{id}")
+    @GetMapping(value = "/accountancyByEmail/{email}")
+    public List<AccountancyDto> getAccountancyByEmail(@PathVariable String email){
+        return facade.fetchAccountancyByEmail(email);
+    }
+
+    @DeleteMapping(value = "/accountancy/{id}")
     public void deleteAccountancy(@PathVariable Long id) {
         AccountancyDto tempAcc = facade.fetchAccountancy(id).orElse(null);
-        if(tempAcc!=null){
+        if (tempAcc != null) {
             applicationLogsService.saveLog(new ApplicationLogs(LogType.DELETED, "Invoice " + tempAcc.getInvoiceNumber() +
                     " was removed"));
         }
         facade.deleteAccountancy(id);
     }
 
+
     @PutMapping(value = "/accountancy")
     public AccountancyDto updateAccountancy(@RequestBody AccountancyDto accountancyDto) {
         AccountancyDto tempAcc = facade.updateAccountancy(accountancyDto);
-        if(tempAcc!=null){
+        if (tempAcc != null) {
             applicationLogsService.saveLog(new ApplicationLogs(LogType.UPDATED, "Invoice " + tempAcc.getInvoiceNumber() +
                     "was updated"));
         }

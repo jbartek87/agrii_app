@@ -38,8 +38,5 @@ public class UserFacade {
         service.saveUser(mapper.mapToUser(userDto));
     }
 
-    public Long validateUser(String email, String firstname){
-        UserDto userDto =service.validateUser(email, firstname);
-        return userDto.getId();
-    }
+    public UserDto fetchUserByEmail(String email){return mapper.mapToUserDto(service.getUserByEmail(email));}
 }

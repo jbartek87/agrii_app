@@ -63,8 +63,8 @@ public class UserController {
                 " was created"));
     }
 
-    @GetMapping(value = "/validate/{email}&{firstname}")
-    public Long validateUser(@PathVariable String email, @PathVariable String firstname){
-       return facade.validateUser(email, firstname);
+    @GetMapping(value = "/usersByEmail/{email}")
+    public UserDto validateUser(@PathVariable String email){
+       return facade.fetchUserByEmail(email);
     }
 }

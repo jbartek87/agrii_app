@@ -35,8 +35,6 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public UserDto validateUser(final String email, String firstName){
-      return   mapper.mapToUserDto(userRepository.findAllByEmailAndAndFirstName(email, firstName));
-    }
+    public User getUserByEmail(final String email){return userRepository.findByEmail(email); }
 
 }
