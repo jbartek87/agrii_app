@@ -15,7 +15,6 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private long id;
 
@@ -41,6 +40,14 @@ public class User {
             fetch = FetchType.LAZY
     )
     private List<Parcel> parcelList = new ArrayList<>();
+
+    @OneToMany(
+            targetEntity = Accountancy.class,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Accountancy> accountancyList = new ArrayList<>();
 
     public User(String firstName, String lastName,String farmNumber, String email){
         this.firstName = firstName;

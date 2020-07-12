@@ -32,6 +32,11 @@ public class FieldWorkController {
         return facade.fetchFieldWork(id).orElseThrow(FieldWorkNotFoundException::new);
     }
 
+    @GetMapping(value = "/fieldWorkByUser/{email}")
+    public List<FieldWorkDto> getFieldWorkByEmail(@PathVariable String email) {
+        return facade.fetchFieldWorkByEmail(email);
+    }
+
     @DeleteMapping(value = "/fieldWork/{id}")
     public void deleteFieldWork(@PathVariable Long id) {
         FieldWorkDto tempWork = facade.fetchFieldWork(id).orElse(null);
@@ -44,20 +49,19 @@ public class FieldWorkController {
 
     @PutMapping(value = "/fieldWork")
     public FieldWorkDto updateFieldWork(@RequestBody FieldWorkDto fieldWorkDto) {
-        {
             FieldWorkDto tempWork = facade.updateFieldWork(fieldWorkDto);
             if (tempWork != null) {
                 service.saveLog(new ApplicationLogs(LogType.UPDATED, "Fieldwok " + tempWork.getId() +
                         " was updated"));
             }
-        }
+
         return facade.updateFieldWork(fieldWorkDto);
     }
 
     @PostMapping(value = "/fieldWork")
-    public void createField(FieldWorkDto fieldWorkDto) {
+    public void createField(@RequestBody FieldWorkDto fieldWorkDto) {
+        facade.createFieldWork(fieldWorkDto);
         service.saveLog(new ApplicationLogs(LogType.CREATED, "Fieldwork " + fieldWorkDto.getTypeOfWork() +
                 " was created"));
-        facade.createFieldWork(fieldWorkDto);
     }
 }

@@ -26,6 +26,7 @@ public class UserMapper {
                 .lastName(userDto.getFarmNumber())
                 .farmNumber(userDto.getFarmNumber())
                 .password(userDto.getPassword())
+                .email(userDto.getEmail())
                 .build();
     }
 

@@ -3,8 +3,10 @@ package com.jbartek.agrii.controller;
 
 import com.google.gson.Gson;
 import com.jbartek.agrii.domain.Accountancy;
+import com.jbartek.agrii.domain.User;
 import com.jbartek.agrii.domain.logs.ApplicationLogs;
 import com.jbartek.agrii.dto.AccountancyDto;
+import com.jbartek.agrii.dto.UserDto;
 import com.jbartek.agrii.enums.TypeOfEvent;
 import com.jbartek.agrii.facade.AccountancyFacade;
 import com.jbartek.agrii.mapper.AccountancyMapper;
@@ -26,6 +28,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,7 +63,7 @@ public class AccountancyControllerTest {
         List<AccountancyDto> testList = new ArrayList<>();
         AccountancyDto accountancyDto = new AccountancyDto(1L, LocalDate.now(), TypeOfEvent.INCOME,
                 "FV100", "pszenica", 100, new BigDecimal(100),
-                23, new BigDecimal(100), new BigDecimal(200));
+                23, new BigDecimal(100), new BigDecimal(200),1);
         testList.add(accountancyDto);
 
         when(facade.fetchAllAccountancy()).thenReturn(testList);
@@ -78,7 +81,7 @@ public class AccountancyControllerTest {
         //Given
         AccountancyDto accountancyDto = new AccountancyDto(1L, LocalDate.now(), TypeOfEvent.INCOME,
                 "FV100", "pszenica", 100, new BigDecimal(100),
-                23, new BigDecimal(100), new BigDecimal(200));
+                23, new BigDecimal(100), new BigDecimal(200),1);
 
         when(facade.fetchAccountancy(1L)).thenReturn(Optional.ofNullable(accountancyDto));
         //When & Then
@@ -102,17 +105,17 @@ public class AccountancyControllerTest {
         //Given
         AccountancyDto accountancyDto = new AccountancyDto(1L, LocalDate.now(), TypeOfEvent.INCOME,
                 "FV100", "pszenica", 100, new BigDecimal(100),
-                23, new BigDecimal(100), new BigDecimal(200));
+                23, new BigDecimal(100), new BigDecimal(200),1);
 
         Accountancy accountancy = new Accountancy(1L, LocalDate.now(), TypeOfEvent.INCOME,
                 "FV100", "pszenica", 100, new BigDecimal(100),
-                23, new BigDecimal(100), new BigDecimal(200));
+                23, new BigDecimal(100), new BigDecimal(200), User.builder().build());
 
         Gson gson = new Gson();
         String jsonContent = "{\"id\": \"1\",\"dateOfEvent\": \"2020-10-10\", \"typeOfEvent\": \"INCOME\", " +
                 "\"invoiceNumber\": \"FV100\", \"product\": \"pszenica\", \"productQuantity\": \"100\"," +
                 "\"netUnitPrice\": \"100\", \"vatRate\": \"23\", \"netTotalSum\": \"100\"," +
-                "\"totalSum\": \"200\"}";
+                "\"totalSum\": \"200\", \"userId\": \"1\"}";
 
         //When
         mockMvc.perform(MockMvcRequestBuilders.post("/v1/accountancy")
@@ -128,7 +131,7 @@ public class AccountancyControllerTest {
         //Given
         Accountancy accountancy = new Accountancy(1L, LocalDate.now(), TypeOfEvent.INCOME,
                 "FV100", "pszenica", 100, new BigDecimal(100),
-                23, new BigDecimal(100), new BigDecimal(200));
+                23, new BigDecimal(100), new BigDecimal(200), User.builder().build());
         long accId = accountancy.getId();
 
         //When & THen
@@ -143,12 +146,12 @@ public class AccountancyControllerTest {
         //Given
         AccountancyDto accountancyDto = new AccountancyDto(1L, LocalDate.now(), TypeOfEvent.INCOME,
                 "FV100", "pszenica", 100, new BigDecimal(100),
-                23, new BigDecimal(100), new BigDecimal(200));
+                23, new BigDecimal(100), new BigDecimal(200),1);
 
         String jsonContent = "{\"id\": \"1\",\"dateOfEvent\": \"2020-10-10\", \"typeOfEvent\": \"INCOME\", " +
                 "\"invoiceNumber\": \"FV100\", \"product\": \"pszenica\", \"productQuantity\": \"100\"," +
                 "\"netUnitPrice\": \"100\", \"vatRate\": \"23\", \"netTotalSum\": \"100\"," +
-                "\"totalSum\": \"200\"}";
+                "\"totalSum\": \"200\",\"userId\": \"1\"}";
         when(facade.updateAccountancy(any(AccountancyDto.class))).thenReturn(accountancyDto);
         //When & THen
         mockMvc.perform(MockMvcRequestBuilders.put("/v1/accountancy")
@@ -161,5 +164,30 @@ public class AccountancyControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.product", Matchers.is("pszenica")));
 
     }
+
+//    @Test
+//    public void shouldFetchAccountancyByEmail() throws Exception {
+//        //Given
+//        UserDto userDto = new UserDto(1L, "Bartek", "Kowalski", "PL200987",
+//                "jb@google.pl", " 12345");
+//        AccountancyDto accountancyDto = new AccountancyDto(1L, LocalDate.now(), TypeOfEvent.INCOME,
+//                "FV100", "pszenica", 100, new BigDecimal(100),
+//                23, new BigDecimal(100), new BigDecimal(200),1);
+//
+//        when(facade.fetchAccountancyByEmail("jb@google.pl")).thenReturn(accountancyDto);
+//        //When & Then
+//        mockMvc.perform(MockMvcRequestBuilders.get("/v1/accountancyByEmail/jb@google.pl")
+//                .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.typeOfEvent", Matchers.is("INCOME")))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.vatRate", Matchers.is(23)))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.product", Matchers.is("pszenica")))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.invoiceNumber", Matchers.is("FV100")))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.productQuantity", Matchers.is(100)))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.netTotalSum", Matchers.is(100)))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.totalSum", Matchers.is(200)));
+//
+//    }
 
 }

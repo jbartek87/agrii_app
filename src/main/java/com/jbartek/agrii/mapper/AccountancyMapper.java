@@ -2,7 +2,7 @@ package com.jbartek.agrii.mapper;
 
 import com.jbartek.agrii.domain.Accountancy;
 import com.jbartek.agrii.dto.AccountancyDto;
-import com.jbartek.agrii.services.AccountancyService;
+import com.jbartek.agrii.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,50 +11,45 @@ import java.util.stream.Collectors;
 
 @Component
 public class AccountancyMapper {
-
+    @Autowired
+    UserService userService;
 
 
     public Accountancy mapToAccountancy(final AccountancyDto accountancyDto){
-        return new Accountancy(
-                accountancyDto.getId(),
-                accountancyDto.getDateOfEvent(),
-                accountancyDto.getTypeOfEvent(),
-                accountancyDto.getInvoiceNumber(),
-                accountancyDto.getProduct(),
-                accountancyDto.getProductQuantity(),
-                accountancyDto.getNetUnitPrice(),
-                accountancyDto.getVatRate(),
-                accountancyDto.getNetTotalSum(),
-                accountancyDto.getTotalSum());
+        return Accountancy.builder()
+                .id(accountancyDto.getId())
+                .dateOfEvent(accountancyDto.getDateOfEvent())
+                .typeOfEvent(accountancyDto.getTypeOfEvent())
+                .invoiceNumber(accountancyDto.getInvoiceNumber())
+                .product(accountancyDto.getProduct())
+                .netUnitPrice(accountancyDto.getNetUnitPrice())
+                .productQuantity(accountancyDto.getProductQuantity())
+                .vatRate(accountancyDto.getVatRate())
+                .netTotalSum(accountancyDto.getNetTotalSum())
+                .totalSum(accountancyDto.getTotalSum())
+                .user(userService.getUser(accountancyDto.getUserId()).orElse(null))
+                .build();
     }
 
     public AccountancyDto mapToAccountancyDto(final Accountancy accountancy) {
-        return new AccountancyDto(
-                accountancy.getId(),
-                accountancy.getDateOfEvent(),
-                accountancy.getTypeOfEvent(),
-                accountancy.getInvoiceNumber(),
-                accountancy.getProduct(),
-                accountancy.getProductQuantity(),
-                accountancy.getNetUnitPrice(),
-                accountancy.getVatRate(),
-                accountancy.getNetTotalSum(),
-                accountancy.getTotalSum());
+        return AccountancyDto.builder()
+                .id(accountancy.getId())
+                .dateOfEvent(accountancy.getDateOfEvent())
+                .typeOfEvent(accountancy.getTypeOfEvent())
+                .invoiceNumber(accountancy.getInvoiceNumber())
+                .product(accountancy.getProduct())
+                .netUnitPrice(accountancy.getNetUnitPrice())
+                .productQuantity(accountancy.getProductQuantity())
+                .vatRate(accountancy.getVatRate())
+                .netTotalSum(accountancy.getNetTotalSum())
+                .totalSum(accountancy.getTotalSum())
+                .userId(accountancy.getUser().getId())
+                .build();
     }
 
     public List<AccountancyDto> mapToAccountancyDtoList(final List<Accountancy> accountancyList){
         return accountancyList.stream()
-                .map(a->new AccountancyDto(
-                        a.getId(),
-                        a.getDateOfEvent(),
-                        a.getTypeOfEvent(),
-                        a.getInvoiceNumber(),
-                        a.getProduct(),
-                        a.getProductQuantity(),
-                        a.getNetUnitPrice(),
-                        a.getVatRate(),
-                        a.getNetTotalSum(),
-                        a.getTotalSum()))
+                .map(this::mapToAccountancyDto)
                 .collect(Collectors.toList());
     }
 }

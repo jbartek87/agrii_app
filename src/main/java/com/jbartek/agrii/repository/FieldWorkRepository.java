@@ -23,5 +23,6 @@ public interface FieldWorkRepository extends CrudRepository<FieldWork, Long> {
 
     void deleteById(Long id);
 
+    List<FieldWork> findByParcel_UserEmail(String email);
 
 }

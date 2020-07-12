@@ -1,11 +1,10 @@
 package com.jbartek.agrii.facade;
 
-import com.jbartek.agrii.domain.Accountancy;
 import com.jbartek.agrii.dto.AccountancyDto;
 import com.jbartek.agrii.mapper.AccountancyMapper;
+import com.jbartek.agrii.repository.UserRepository;
 import com.jbartek.agrii.services.AccountancyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,14 +14,14 @@ import java.util.Optional;
 public class AccountancyFacade {
 
     AccountancyService service;
-
-
+    UserRepository repository;
     AccountancyMapper mapper;
 
     @Autowired
-    public AccountancyFacade(AccountancyService service, AccountancyMapper accountancyMapper) {
+    public AccountancyFacade(AccountancyService service, AccountancyMapper accountancyMapper, UserRepository repository) {
         this.service = service;
         this.mapper = accountancyMapper;
+        this.repository = repository;
     }
 
     public List<AccountancyDto> fetchAllAccountancy(){
@@ -45,5 +44,9 @@ public class AccountancyFacade {
 
     public void createAccountancy(AccountancyDto accountancyDto){
         service.saveAccountancy(mapper.mapToAccountancy(accountancyDto));
+    }
+
+    public List<AccountancyDto> fetchAccountancyByEmail(String email){
+        return mapper.mapToAccountancyDtoList(service.getAccountancyByEmail(email));
     }
 }

@@ -2,7 +2,6 @@ package com.jbartek.agrii.domain.logs;
 
 
 import com.jbartek.agrii.enums.LogType;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

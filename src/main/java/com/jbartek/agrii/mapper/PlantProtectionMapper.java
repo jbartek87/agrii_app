@@ -18,6 +18,7 @@ public class PlantProtectionMapper {
 
     public PlantProtection mapToPlantProtection(final PlantProtectionDto plantProtectionDto) {
         return new PlantProtection(
+                plantProtectionDto.getId(),
                 plantProtectionDto.getDateOfWork(),
                 plantProtectionDto.getProductName(),
                 plantProtectionDto.getProtectionType(),

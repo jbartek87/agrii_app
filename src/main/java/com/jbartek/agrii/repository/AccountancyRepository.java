@@ -20,4 +20,6 @@ public interface AccountancyRepository extends CrudRepository<Accountancy,Long> 
     Accountancy save(Accountancy accountancy);
 
     void deleteById(Long id);
+
+    List<Accountancy> findByUser_Email(String email);
 }

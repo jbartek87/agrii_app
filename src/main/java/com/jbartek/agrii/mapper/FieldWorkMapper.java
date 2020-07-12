@@ -2,8 +2,8 @@ package com.jbartek.agrii.mapper;
 
 import com.jbartek.agrii.domain.FieldWork;
 import com.jbartek.agrii.dto.FieldWorkDto;
-import com.jbartek.agrii.repository.ParcelRepository;
 import com.jbartek.agrii.services.ParcelService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,13 +18,15 @@ public class FieldWorkMapper {
 
 
 
-    public FieldWork mapToFieldWork(final FieldWorkDto fieldWorkDto){
-        return new FieldWork(
-                fieldWorkDto.getDateOfWork(),
-                fieldWorkDto.getCultivatedPlant(),
-                fieldWorkDto.getTypeOfWork(),
-                fieldWorkDto.getComments(),
-                service.getParcel(fieldWorkDto.getParcelId()).orElse(null));
+    public FieldWork mapToFieldWork(@NotNull final FieldWorkDto fieldWorkDto){
+        return FieldWork.builder()
+                .id(fieldWorkDto.getId())
+                .dateOfWork(fieldWorkDto.getDateOfWork())
+                .cultivatedPlant(fieldWorkDto.getCultivatedPlant())
+                .typeOfWork(fieldWorkDto.getTypeOfWork())
+                .comments(fieldWorkDto.getComments())
+                .parcel(service.getParcel(fieldWorkDto.getParcelId()).orElse(null))
+                .build();
     }
 
     public FieldWorkDto mapToFieldWorkDto(final FieldWork fieldWork){

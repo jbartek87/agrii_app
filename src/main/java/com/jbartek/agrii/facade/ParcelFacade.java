@@ -1,7 +1,6 @@
 package com.jbartek.agrii.facade;
 
 
-import com.jbartek.agrii.domain.Parcel;
 import com.jbartek.agrii.dto.ParcelDto;
 import com.jbartek.agrii.mapper.ParcelMapper;
 import com.jbartek.agrii.services.ParcelService;
@@ -37,7 +36,13 @@ public class ParcelFacade {
     }
 
     public void createParcel(ParcelDto parcelDto){
+
         service.saveParcel(mapper.mapToParcel(parcelDto));
     }
+
+    public List<ParcelDto> fetchParcelByUser(String email){
+        return mapper.mapToParcelDtoList(service.getParcelByUserEmail(email));
+    }
+
 
 }

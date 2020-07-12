@@ -1,18 +1,17 @@
 package com.jbartek.agrii.domain;
 
 import com.jbartek.agrii.enums.TypeOfEvent;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Getter
+@Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="accountancy")
+@Entity(name = "accountancy")
 public class Accountancy {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,7 +36,9 @@ public class Accountancy {
     @Column
     private BigDecimal totalSum;
 
-
+    @ManyToOne
+    @JoinColumn(name ="USER_ID")
+    User user;
 
 
 }

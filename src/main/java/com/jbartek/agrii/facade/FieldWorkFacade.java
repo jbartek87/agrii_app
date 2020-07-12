@@ -1,7 +1,6 @@
 package com.jbartek.agrii.facade;
 
 
-import com.jbartek.agrii.domain.FieldWork;
 import com.jbartek.agrii.dto.FieldWorkDto;
 import com.jbartek.agrii.mapper.FieldWorkMapper;
 import com.jbartek.agrii.services.FieldWorkService;
@@ -38,5 +37,9 @@ public class FieldWorkFacade {
 
     public void createFieldWork(FieldWorkDto fieldWorkDto){
        service.saveFieldWork(mapper.mapToFieldWork(fieldWorkDto));
+    }
+
+    public List<FieldWorkDto> fetchFieldWorkByEmail(String email){
+        return mapper.mapToFieldWorkDtoList(service.getFieldWorkByEmail(email));
     }
 }

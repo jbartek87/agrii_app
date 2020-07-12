@@ -29,5 +29,6 @@ public class ParcelService {
         parcelRepository.deleteById(id);
     }
 
+    public List<Parcel> getParcelByUserEmail(final String email){return parcelRepository.findByUser_Email(email);}
 
 }
