@@ -1,6 +1,5 @@
 package com.jbartek.agrii.facade;
 
-import com.jbartek.agrii.domain.PlantProtection;
 import com.jbartek.agrii.dto.PlantProtectionDto;
 import com.jbartek.agrii.mapper.PlantProtectionMapper;
 import com.jbartek.agrii.services.PlantProtectionService;

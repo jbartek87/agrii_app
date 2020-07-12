@@ -1,9 +1,8 @@
 package com.jbartek.agrii.mapper;
 
 import com.jbartek.agrii.domain.Accountancy;
-import com.jbartek.agrii.domain.User;
 import com.jbartek.agrii.dto.AccountancyDto;
-import com.jbartek.agrii.services.AccountancyService;
+import com.jbartek.agrii.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +11,11 @@ import java.util.stream.Collectors;
 
 @Component
 public class AccountancyMapper {
+    @Autowired
+    UserService userService;
 
 
-
-    public Accountancy mapToAccountancy(final AccountancyDto accountancyDto, final User user){
+    public Accountancy mapToAccountancy(final AccountancyDto accountancyDto){
         return Accountancy.builder()
                 .id(accountancyDto.getId())
                 .dateOfEvent(accountancyDto.getDateOfEvent())
@@ -27,7 +27,7 @@ public class AccountancyMapper {
                 .vatRate(accountancyDto.getVatRate())
                 .netTotalSum(accountancyDto.getNetTotalSum())
                 .totalSum(accountancyDto.getTotalSum())
-                .user(user)
+                .user(userService.getUser(accountancyDto.getUserId()).orElse(null))
                 .build();
     }
 

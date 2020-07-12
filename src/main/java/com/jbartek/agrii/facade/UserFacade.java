@@ -6,7 +6,6 @@ import com.jbartek.agrii.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
 import java.util.List;
 import java.util.Optional;
 

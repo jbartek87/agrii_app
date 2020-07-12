@@ -1,7 +1,6 @@
 package com.jbartek.agrii.facade;
 
 
-import com.jbartek.agrii.domain.FieldWork;
 import com.jbartek.agrii.dto.FieldWorkDto;
 import com.jbartek.agrii.mapper.FieldWorkMapper;
 import com.jbartek.agrii.services.FieldWorkService;

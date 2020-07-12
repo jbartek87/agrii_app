@@ -49,7 +49,6 @@ public class AccountancyController {
         facade.deleteAccountancy(id);
     }
 
-
     @PutMapping(value = "/accountancy")
     public AccountancyDto updateAccountancy(@RequestBody AccountancyDto accountancyDto) {
         AccountancyDto tempAcc = facade.updateAccountancy(accountancyDto);

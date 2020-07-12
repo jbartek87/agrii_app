@@ -1,6 +1,5 @@
 package com.jbartek.agrii.controller;
 
-import com.jbartek.agrii.domain.FieldWork;
 import com.jbartek.agrii.domain.logs.ApplicationLogs;
 import com.jbartek.agrii.dto.FieldWorkDto;
 import com.jbartek.agrii.enums.LogType;

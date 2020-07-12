@@ -1,6 +1,5 @@
 package com.jbartek.agrii.controller;
 
-import com.jbartek.agrii.domain.Parcel;
 import com.jbartek.agrii.domain.logs.ApplicationLogs;
 import com.jbartek.agrii.dto.ParcelDto;
 import com.jbartek.agrii.enums.LogType;

@@ -1,13 +1,11 @@
 package com.jbartek.agrii.controller;
 
-import com.jbartek.agrii.domain.logs.ApplicationLogs;
-import com.jbartek.agrii.dto.AccountancyDto;
-import com.jbartek.agrii.enums.LogType;
-import com.jbartek.agrii.facade.AccountancyFacade;
 import com.jbartek.agrii.facade.logs.ApplicationLogsFacade;
-import com.jbartek.agrii.services.logs.ApplicationLogsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1")

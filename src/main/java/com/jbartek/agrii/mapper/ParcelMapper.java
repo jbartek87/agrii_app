@@ -66,19 +66,5 @@ public class ParcelMapper {
                 .collect(Collectors.toList());
     }
 
-//    public List<Parcel> mapToParcelList(final List<ParcelDto> parcelDtoList){
-//        return parcelDtoList.stream()
-//                .map(p-> new Parcel(
-//                        p.getId(),
-//                        p.getParcelNumber(),
-//                        p.getPrecinct(),
-//                        p.getSoilType(),
-//                        p.getArea(),
-//                        fieldWorkMapper.mapToFieldWorkList(p.getFieldWorkDtoList()),
-//                        plantProtectionMapper.mapToPlantProtectionList(p.getPlantProtectionDtoList()),
-//                        userService.getUser(p.getUserId()).orElse(null)))
-//                .collect(Collectors.toList());
-//
-//    }
 
 }

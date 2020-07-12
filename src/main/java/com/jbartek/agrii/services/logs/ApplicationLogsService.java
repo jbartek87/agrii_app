@@ -15,14 +15,6 @@ public class ApplicationLogsService {
     @Autowired
     ApplicationLogsRepository repository;
 
-    public List<ApplicationLogs> getAllLogs(){
-        return repository.findAll();
-    }
-
-    public long countLogs(){
-        return repository.count();
-    }
-
     public ApplicationLogs saveLog(ApplicationLogs applicationLogs){
         return repository.save(applicationLogs);
     }
@@ -31,11 +23,5 @@ public class ApplicationLogsService {
         repository.deleteAll();
     }
 
-    public List<ApplicationLogs> findLogByDate(LocalDate date){
-        return repository.findByDate(date);
-    }
 
-    public List<ApplicationLogs> findLogByType(LogType type){
-        return repository.findByType(type);
-    }
 }

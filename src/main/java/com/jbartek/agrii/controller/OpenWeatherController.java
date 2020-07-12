@@ -1,8 +1,6 @@
 package com.jbartek.agrii.controller;
 
-import com.jbartek.agrii.dto.WeatherApiDto;
 import com.jbartek.agrii.weatherApi.OpenWeather;
-import com.jbartek.agrii.weatherApi.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

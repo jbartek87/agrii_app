@@ -35,7 +35,6 @@ public class FieldWork {
     private String comments;
 
     @ManyToOne
-//    @JoinColumn(name = "PARCEL_ID")
     private Parcel parcel;
 
 

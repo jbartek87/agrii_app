@@ -1,15 +1,12 @@
 package com.jbartek.agrii.mapper;
 
 import com.jbartek.agrii.domain.FieldWork;
-import com.jbartek.agrii.domain.Parcel;
 import com.jbartek.agrii.dto.FieldWorkDto;
-import com.jbartek.agrii.repository.ParcelRepository;
 import com.jbartek.agrii.services.ParcelService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Collectors;
 

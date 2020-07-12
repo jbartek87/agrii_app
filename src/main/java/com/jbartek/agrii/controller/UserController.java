@@ -6,10 +6,7 @@ import com.jbartek.agrii.dto.UserDto;
 import com.jbartek.agrii.enums.LogType;
 import com.jbartek.agrii.exceptions.UserNotFoundException;
 import com.jbartek.agrii.facade.UserFacade;
-import com.jbartek.agrii.mapper.UserMapper;
-import com.jbartek.agrii.services.UserService;
 import com.jbartek.agrii.services.logs.ApplicationLogsService;
-import com.sun.org.apache.xpath.internal.objects.XBoolean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

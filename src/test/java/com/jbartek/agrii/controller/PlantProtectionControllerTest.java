@@ -39,7 +39,6 @@ public class PlantProtectionControllerTest {
     @MockBean
     PlantProtectionFacade facade;
 
-
     @MockBean
     ApplicationLogsService service;
 

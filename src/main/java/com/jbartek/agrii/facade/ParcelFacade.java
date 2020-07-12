@@ -1,9 +1,7 @@
 package com.jbartek.agrii.facade;
 
 
-import com.jbartek.agrii.domain.Parcel;
 import com.jbartek.agrii.dto.ParcelDto;
-import com.jbartek.agrii.dto.UserDto;
 import com.jbartek.agrii.mapper.ParcelMapper;
 import com.jbartek.agrii.services.ParcelService;
 import org.springframework.beans.factory.annotation.Autowired;

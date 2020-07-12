@@ -12,4 +12,6 @@ public class LorDto {
     private String textType;
     private int paragraphs;
     private String content;
+
+
 }
