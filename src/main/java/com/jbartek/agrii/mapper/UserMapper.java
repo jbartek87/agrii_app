@@ -23,7 +23,7 @@ public class UserMapper {
         return User.builder()
                 .id(userDto.getId())
                 .firstName(userDto.getFirstName())
-                .lastName(userDto.getFarmNumber())
+                .lastName(userDto.getLastName())
                 .farmNumber(userDto.getFarmNumber())
                 .password(userDto.getPassword())
                 .email(userDto.getEmail())

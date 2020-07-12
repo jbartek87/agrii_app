@@ -2,11 +2,8 @@ package com.jbartek.agrii.weatherApi;
 
 
 import com.jbartek.agrii.config.OwApiConfig;
-import com.jbartek.agrii.dto.WeatherApiDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -28,8 +25,8 @@ public class OpenWeather {
         final double wind = response.getBody().getWind().getSpeed();
         final int humidity = response.getBody().getMain().getHumidity();
 
-        String xxx = "Temperature is: " + temp + " celsius degrees\nWind speed is: " + wind +" m/s\n"+ "Humidity is: " + humidity;
-        return xxx;
+        String temperatureInfo = "Temperature is: " + temp + " celsius degrees\nWind speed is: " + wind +" m/s\n"+ "Humidity is: " + humidity;
+        return temperatureInfo;
 
     }
 
