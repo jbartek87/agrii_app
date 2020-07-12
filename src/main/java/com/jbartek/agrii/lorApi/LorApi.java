@@ -8,7 +8,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 @Component
 public class LorApi {
-    @Value("${loripsum.api.endpoint.prod}")
+    @Value("${loripsum.api.endpoint}")
     private String loripsumApiEndPoint;
     private RestTemplate restTemplate;
     private LorDto loripsumDto = new LorDto();
@@ -21,7 +21,7 @@ public class LorApi {
     public String getLoripsum() {
         loripsumDto.setTextLength("medium");
         loripsumDto.setTextType("plaintext");
-        loripsumDto.setParagraphs(3);
+        loripsumDto.setParagraphs(2);
 
         try {
             loripsumDto.setContent(restTemplate.getForObject(loripsumApiEndPoint + "/" + loripsumDto.getTextLength() +
@@ -29,7 +29,7 @@ public class LorApi {
 
         } catch (RestClientException e) {
             System.out.println(e);
-            loripsumDto.setContent("There was an error with request to the API...");
+            loripsumDto.setContent("Error with lorem content");
         }
 
         return loripsumDto.getContent();

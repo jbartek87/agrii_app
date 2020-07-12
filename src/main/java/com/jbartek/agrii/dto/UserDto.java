@@ -18,5 +18,4 @@ public class UserDto {
     private String farmNumber;
     private String email;
     private String password;
-//    private List<ParcelDto> parcelDtoList;
 }
