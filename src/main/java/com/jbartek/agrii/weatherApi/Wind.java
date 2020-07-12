@@ -6,4 +6,11 @@ public class Wind {
     public double getSpeed() {
         return speed;
     }
+
+    @Override
+    public String toString() {
+        return "Wind{" +
+                "speed=" + speed +
+                '}';
+    }
 }

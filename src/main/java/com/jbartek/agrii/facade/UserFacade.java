@@ -39,4 +39,8 @@ public class UserFacade {
     }
 
     public UserDto fetchUserByEmail(String email){return mapper.mapToUserDto(service.getUserByEmail(email));}
+
+    public boolean validateUser(String email, String password){
+      return   service.validateUser(email, password);
+    }
 }

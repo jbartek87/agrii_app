@@ -9,6 +9,7 @@ import com.jbartek.agrii.facade.UserFacade;
 import com.jbartek.agrii.mapper.UserMapper;
 import com.jbartek.agrii.services.UserService;
 import com.jbartek.agrii.services.logs.ApplicationLogsService;
+import com.sun.org.apache.xpath.internal.objects.XBoolean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,4 +68,10 @@ public class UserController {
     public UserDto validateUser(@PathVariable String email){
        return facade.fetchUserByEmail(email);
     }
+
+    @GetMapping(value = "/validateUser/{email}&{password}")
+        public boolean validate(@PathVariable String email, @PathVariable String password){
+        return facade.validateUser(email,password);
+    }
+
 }

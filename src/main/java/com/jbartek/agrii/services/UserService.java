@@ -37,4 +37,11 @@ public class UserService {
 
     public User getUserByEmail(final String email){return userRepository.findByEmail(email); }
 
+    public boolean validateUser(final String email, final String password){
+        Optional<User> user = userRepository.findByEmailAndPassword(email,password);
+        if(user.isPresent()){
+            return false;
+        }else return true;
+    }
+
 }

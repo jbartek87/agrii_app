@@ -1,5 +1,6 @@
 package com.jbartek.agrii.controller;
 
+import com.jbartek.agrii.dto.WeatherApiDto;
 import com.jbartek.agrii.weatherApi.OpenWeather;
 import com.jbartek.agrii.weatherApi.Main;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ public class OpenWeatherController {
     @Autowired
     OpenWeather client;
 
-    @GetMapping(value = "weather")
-    public void getWeather() throws IOException {
-        client.getWeather();
+    @GetMapping(value = "weather/{city}")
+    public String getWeather(@PathVariable String city) throws IOException {
+       return client.getWeather(city);
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConf
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-//@ComponentScan({"com.*"})
 public class AgriiApplication{
 
     public static void main(String[] args) {
