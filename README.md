@@ -4,6 +4,7 @@ Aplikacja tworzy dla danego usera działki, prace polowe, zabiegi ochrony rośli
 
 Funkjonalności:
 Zewnętrzne API : OpenWeather, LoripsumApi
+
 Scheduler - czyszczenie logów w konkretnym terminie
 Logi - zapisywanie w bazie danych
 
