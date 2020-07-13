@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "PLANT_PROTECTION")
+@Table(name = "PLANTS_PROTECTION")
 public class PlantProtection {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
