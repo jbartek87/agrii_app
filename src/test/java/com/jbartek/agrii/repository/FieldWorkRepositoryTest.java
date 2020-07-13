@@ -18,34 +18,34 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
-@SpringBootTest
-@RunWith(SpringRunner.class)
-public class FieldWorkRepositoryTest {
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    ParcelRepository parcelRepository;
-
-    @Autowired
-    FieldWorkRepository fieldWorkRepository;
-
-    @Test
-    @Transactional
-    public void testRealtions(){
-        //Given
-        User user = new User("Bartek", "Kowalski", "07865456", "bj@bj.com");
-        Parcel parcelFirst = new Parcel("200", "Babimost", SoilType.GRUNT_ORNY, 100.0);
-        FieldWork fieldWork1 = new FieldWork(LocalDate.now(), "pszenica", TypeOfWork.ORKA, "brak", parcelFirst);
-        parcelFirst.getFieldWorkList().add(fieldWork1);
-
-        //When & Then
-        userRepository.save(user);
-        parcelRepository.save(parcelFirst);
-        fieldWorkRepository.save(fieldWork1);
-
-        int result2 = parcelFirst.getFieldWorkList().size(); //
-
-        Assert.assertEquals(1, result2);
-    }
-}
+//@SpringBootTest
+//@RunWith(SpringRunner.class)
+//public class FieldWorkRepositoryTest {
+//    @Autowired
+//    UserRepository userRepository;
+//
+//    @Autowired
+//    ParcelRepository parcelRepository;
+//
+//    @Autowired
+//    FieldWorkRepository fieldWorkRepository;
+//
+//    @Test
+//    @Transactional
+//    public void testRealtions(){
+//        //Given
+//        User user = new User("Bartek", "Kowalski", "07865456", "bj@bj.com");
+//        Parcel parcelFirst = new Parcel("200", "Babimost", SoilType.GRUNT_ORNY, 100.0);
+//        FieldWork fieldWork1 = new FieldWork(LocalDate.now(), "pszenica", TypeOfWork.ORKA, "brak", parcelFirst);
+//        parcelFirst.getFieldWorkList().add(fieldWork1);
+//
+//        //When & Then
+//        userRepository.save(user);
+//        parcelRepository.save(parcelFirst);
+//        fieldWorkRepository.save(fieldWork1);
+//
+//        int result2 = parcelFirst.getFieldWorkList().size(); //
+//
+//        Assert.assertEquals(1, result2);
+//    }
+//}

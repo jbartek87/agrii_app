@@ -35,37 +35,20 @@ public class AccountancyServiceTest {
     @Autowired
     AccountancyMapper accountancyMapper;
 
-    @Test
-    public void testAccSave(){
-        //Given
-        UserDto userDto = new UserDto(1L, "Bartek", "Kowalski", "PL200", "wp@wp.pl","12345");
 
-        AccountancyDto accountancy = new AccountancyDto(1L,LocalDate.now(), TypeOfEvent.INCOME,
-                "FV100", "pszenica", 100, new BigDecimal(100),
-                23, new BigDecimal(100), new BigDecimal(200), userDto.getId());
-        //When
-        User userTest = userService.saveUser(userMapper.mapToUser(userDto));
-        Accountancy accountancyTest = accountancyService.saveAccountancy(accountancyMapper.mapToAccountancy(accountancy));
-        List<Accountancy> result = accountancyService.getAllAccountancy();
-
-        //Then
-        Assert.assertEquals(1, result.size());
-        accountancyService.deleteAccountancy(accountancyTest.getId());
-        userService.deleteUser(userTest.getId());
-
-    }
     @Test
     public void testFindByEmail(){
         //Given
         UserDto userDto = new UserDto(1L, "Bartek", "Kowalski", "PL200", "wp@wp.pl","12345");
 
+
+        User userTest = userService.saveUser(userMapper.mapToUser(userDto));
         AccountancyDto accountancy = new AccountancyDto(1L,LocalDate.now(), TypeOfEvent.INCOME,
                 "FV100", "pszenica", 100, new BigDecimal(100),
-                23, new BigDecimal(100), new BigDecimal(200), userDto.getId());
-        User userTest = userService.saveUser(userMapper.mapToUser(userDto));
+                23, new BigDecimal(100), new BigDecimal(200), userTest.getId());
         Accountancy accountancyTest = accountancyService.saveAccountancy(accountancyMapper.mapToAccountancy(accountancy));
         //When
-        List<Accountancy> list = accountancyService.getAccountancyByEmail(userDto.getEmail());
+        List<Accountancy> list = accountancyService.getAccountancyByEmail(userTest.getEmail());
         //Then
         Assert.assertEquals(1, list.size());
         accountancyService.deleteAccountancy(accountancyTest.getId());

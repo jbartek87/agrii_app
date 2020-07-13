@@ -51,7 +51,7 @@ public class PlantProtectionServiceTest {
                 , "12345");
         User user = userService.saveUser(userMapper.mapToUser(userDto));
         ParcelDto parcelDto = new ParcelDto(1L, "100", "Babimost", SoilType.GRUNT_ORNY,
-                100, userDto.getId());
+                100, user.getId());
         Parcel parcel = parcelService.saveParcel(parcelMapper.mapToParcel(parcelDto));
         PlantProtectionDto plantProtectionDto= new PlantProtectionDto(1L, LocalDate.now(), "Karyx",
                 ProtectionType.FUNGICYDE, 10.5, "pszenica", parcel.getId());

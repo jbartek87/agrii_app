@@ -29,7 +29,6 @@ public class UserServiceTest {
     public void createUser(){
         //Given
         UserDto userDto = new UserDto();
-        userDto.setId(1L);
         userDto.setEmail("wp@wp.pl");
         userDto.setFarmNumber("PL100");
         userDto.setFirstName("Bartek");
@@ -47,7 +46,6 @@ public class UserServiceTest {
     public void getUserList(){
         //Given
         UserDto userDto = new UserDto();
-        userDto.setId(1L);
         userDto.setEmail("wp@wp.pl");
         userDto.setFarmNumber("PL100");
         userDto.setFirstName("Bartek");
@@ -68,7 +66,6 @@ public class UserServiceTest {
     public void validateUserTest(){
         //Given
         UserDto userDto = new UserDto();
-        userDto.setId(1L);
         userDto.setEmail("wp@wp.pl");
         userDto.setFarmNumber("PL100");
         userDto.setFirstName("Bartek");
